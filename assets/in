@@ -18,9 +18,11 @@ fi
 # for jq
 PATH=/usr/local/bin:$PATH
 
-payload=$(mktemp $TMPDIR/git-resource-request.XXXXXX)
+payload=$(mktemp $TMPDIR/git-merge-resource-request.XXXXXX)
 
 cat > $payload <&0
+
+echo "$payload"
 
 load_pubkey $payload
 configure_git_ssl_verification $payload
@@ -122,7 +124,7 @@ fi
 # Using https://github.com/mdomke/concourse-email-resource for example
 git --no-pager log -1 --pretty=format:"%ae" > .git/committer
 
-# Store git-resource returned version ref .git/ref. Useful to know concourse
+# Store git-merge-resource returned version ref .git/ref. Useful to know concourse
 # pulled ref in following tasks and resources.
 echo "${return_ref}" > .git/ref
 
